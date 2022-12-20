@@ -1,0 +1,202 @@
+basePath: /api
+definitions:
+  model.User:
+    properties:
+      address:
+        type: string
+      createDate:
+        type: string
+      id:
+        type: integer
+      isDelete:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      phonenumber:
+        type: string
+      role:
+        type: string
+      state:
+        type: string
+      updateDate:
+        type: string
+      website:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@itd.com
+    name: ITD Support
+    url: http://www.itd.io/support
+  description: This is document for APIs.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Bussiness Management APIs
+  version: "1.0"
+paths:
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User info
+        in: body
+        name: user_info
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Create new account
+      tags:
+      - Register
+  /signin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Username and password
+        in: body
+        name: user_info
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Logs user into system
+      tags:
+      - Signin
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: |
+        Add new user into database
+      parameters:
+      - description: User Info
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - Bearer: []
+      summary: Add user into database
+      tags:
+      - User
+  /users/:
+    get:
+      consumes:
+      - application/json
+      description: Get All User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - Bearer: []
+      summary: Show all user
+      tags:
+      - User
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID need to delete
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - Bearer: []
+      summary: Delete user from database
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: Get User by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - Bearer: []
+      summary: Show user with corresponding ID
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID need to update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User Info need to update
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - Bearer: []
+      summary: Update user info
+      tags:
+      - User
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
